@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://last-mission-r93qxhttk-fd-martins-projects.vercel.app",
+  baseURL: "https://mission-final-plum.vercel.app",
   // baseURL: "http://localhost:3000",
 });
 

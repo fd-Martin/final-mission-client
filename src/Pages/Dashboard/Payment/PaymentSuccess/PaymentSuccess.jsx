@@ -16,7 +16,7 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
+      <div className="max-w-md w-full  rounded-2xl shadow-lg p-8 text-center">
         <FaCheckCircle className="text-green-500 text-7xl mx-auto mb-4" />
 
         <h1 className="text-2xl font-bold text-gray-800 mb-2">

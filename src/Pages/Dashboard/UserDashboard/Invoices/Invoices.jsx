@@ -19,6 +19,8 @@ const Invoices = () => {
     },
   });
 
+  console.log(paymentHistory);
+
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
@@ -75,8 +77,8 @@ const Invoices = () => {
                     </td>
 
                     <td>
-                      <span className=" border-indigo-400 font-medium  text-base-100 ">
-                        {history.transectionId}
+                      <span className=" border-indigo-400 font-medium  text-white ">
+                        {history.transactionId}
                       </span>
                     </td>
 
