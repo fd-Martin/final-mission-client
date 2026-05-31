@@ -89,12 +89,9 @@ const Orders = () => {
       {/* Header */}
       <div className="text-center mb-10">
         <h2
-          className="text-4xl md:text-5xl font-extrabold
-          bg-gradient-to-r from-primary to-secondary
-          bg-clip-text text-transparent"
-        >
-          Orders Management
-        </h2>
+          className="text-4xl md:text-5xl font-extrabold          
+          text-black"
+        >Orders Management</h2>
 
         <p className="text-base-content/60 mt-3 text-lg">
           Manage all customer book orders

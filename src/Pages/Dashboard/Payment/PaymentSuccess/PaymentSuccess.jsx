@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
   }, [sessionId, axiosSecure]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50 px-4">
+    <div className="min-h-screen flex items-center justify-center  px-4">
       <div className="max-w-md w-full  rounded-2xl shadow-lg p-8 text-center">
         <FaCheckCircle className="text-green-500 text-7xl mx-auto mb-4" />
 
