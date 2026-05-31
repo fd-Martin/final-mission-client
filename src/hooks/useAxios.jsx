@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://last-mission-delta.vercel.app",
+  baseURL: "https://last-mission-r93qxhttk-fd-martins-projects.vercel.app",
   // baseURL: "http://localhost:3000",
 });
 
