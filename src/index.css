@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+/* index.css */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  
+  /* Brand */
+  --color-primary: #ff4757; 
+  /* bright blue */
+  --color-secondary: #f59e0b; 
+  /* amber/orange */
+  --color-accent: #ced6e0 
+  /* teal */
+
+  
+  /* Background + Text */
+  --color-base-100: #ffffff; 
+  /* white bg */
+  --color-base-content: #111827; 
+  /* dark text */
+
+  
+  /* Neutral */
+  --color-neutral: #d1d5db; 
+  /* gray cards/borders */
+  --color-neutral-content: #1f2937; 
+  /* gray text */
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  prefersdark: true;
+
+  
+  /* Brand */
+  --color-primary: #60a5fa; 
+  /* lighter blue */
+  --color-secondary: #fbbf24; 
+  /* lighter amber */
+  --color-accent:  #ffffff;
+  /* brighter teal */
+
+  
+  /* Background + Text */
+  --color-base-100: #111827; 
+  /* dark bg */
+  --color-base-content: #f9fafb; 
+  /* light text */
+
+  
+  /* Neutral */
+  --color-neutral: #374151; 
+  /* gray cards/borders */
+  --color-neutral-content: #d1d5db; 
+  /* gray text */
+}
+
+.lato-font {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+}
+
+a.active {
+  color: #ff4757;
+  text-decoration: underline;
+  font-weight: bold;
+}

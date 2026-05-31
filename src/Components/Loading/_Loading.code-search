@@ -1,0 +1,156 @@
+# Query: <Loading
+# ContextLines: 1
+
+18 results - 16 files
+
+src\Components\Book\BookDetails.jsx:
+  137    if (isLoading) {
+  138:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  139    }
+
+src\Components\Book\BookEdited.jsx:
+  101    if (isLoading || loading) {
+  102:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  103    }
+
+src\Pages\AllBooks\AllBooks.jsx:
+  33    if (isLoading) {
+  34:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  35    }
+
+src\Pages\AuthPage\Register\Register.jsx:
+  75    if (loading) {
+  76:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  77    }
+
+src\Pages\Dashboard\AdminDashboard\AllUsers\AllUsers.jsx:
+  37    if (isLoading) {
+  38:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  39    }
+
+src\Pages\Dashboard\AdminDashboard\ManageBooks\ManageBooks.jsx:
+  77  
+  78:   if (isLoading)  return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  79  
+
+src\Pages\Dashboard\LibrarianDashboard\AddBook\AddBook.jsx:
+   66  //   if (loading) {
+   67: //     return <Loading></Loading>;
+   68  //   }
+
+  316    if (loading) {
+  317:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  318    }
+
+src\Pages\Dashboard\LibrarianDashboard\MyBooks\MyBooks.jsx:
+  28    if (isLoading) {
+  29:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  30    }
+
+src\Pages\Dashboard\LibrarianDashboard\Orders\Orders.jsx:
+  32    if (isLoading) {
+  33:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  34    }
+
+src\Pages\Dashboard\UserDashboard\Invoices\Invoices.jsx:
+  22    if (isLoading) {
+  23:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  24    }
+
+src\Pages\Dashboard\UserDashboard\MyOrders\MyOrders.jsx:
+  32    if (isLoading) {
+  33:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  34    }
+
+src\Pages\Dashboard\UserDashboard\MyProfile\MyProfile.jsx:
+  85    if (loading || roleLoading) {
+  86:     return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  87    }
+
+src\Pages\Dashboard\UserDashboard\WishList\WishList.jsx:
+   39  
+   40: //   if (isLoading) return <Loading />;
+   41  
+
+  201  
+  202:   if (isLoading)  return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  203  
+
+src\Pages\Home\Home.jsx:
+  39    if (dataLoading || mapLoading || countLoading) {
+  40:     return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  41    }
+
+src\Routes\AdminRoute\AdminRoute.jsx:
+  10    if ((loading, roleLoading)) {
+  11:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  12    }
+
+src\Routes\PrivateRoute\PrivateRoute.jsx:
+  11    if (loading) {
+  12:      return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  13    }
