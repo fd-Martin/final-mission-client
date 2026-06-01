@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const PaymentCancelled = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-red-50 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
         <FaTimesCircle className="text-red-500 text-7xl mx-auto mb-4" />
 

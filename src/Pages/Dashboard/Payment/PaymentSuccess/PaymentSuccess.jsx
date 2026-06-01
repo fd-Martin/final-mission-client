@@ -19,11 +19,11 @@ const PaymentSuccess = () => {
       <div className="max-w-md w-full  rounded-2xl shadow-lg p-8 text-center">
         <FaCheckCircle className="text-green-500 text-7xl mx-auto mb-4" />
 
-        <h1 className="text-2xl font-bold text-gray-800 mb-2">
+        <h1 className="text-2xl font-bold text-black mb-2">
           Payment Successful!
         </h1>
 
-        <p className="text-gray-600 mb-6">
+        <p className="text-black mb-6">
           Thank you for your purchase. Your payment has been completed
           successfully and your order is now being processed.
         </p>

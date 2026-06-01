@@ -30,15 +30,15 @@ const Invoices = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 py-12">
+    <div className="min-h-screen py-12">
       {/* Header */}
       <div className="mb-10 flex items-center justify-center text-center">
         <div>
-          <h2 className=" text-3xl md:text-4xl font-bold  text-white flex items-center gap-3 justify-center">
-            <FaReceipt className="text-indigo-400" />
+          <h2 className=" text-3xl md:text-4xl font-bold  text-black flex items-center gap-3 justify-center">
+            <FaReceipt className="text-black" />
             Payment History
           </h2>
-          <p className="text-sm font-bold text-slate-400 mt-2">
+          <p className="text-sm font-bold text-black mt-2">
             Total Payments{" "}
             <span className="font-bold text-lg text-primary mx-1">
               {paymentHistory.length}
@@ -49,11 +49,11 @@ const Invoices = () => {
 
       {/* Card */}
       <div className="max-w-6xl mx-auto md:px-4">
-        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+        <div className="rounded-2xl border border-white/10 bg-white  shadow-2xl">
           <div className="overflow-x-auto rounded-2xl">
-            <table className="table text-slate-200">
+            <table className="table text-black">
               {/* Table Head */}
-              <thead className="bg-indigo-500/20 text-indigo-300">
+              <thead className="bg-primary text-black">
                 <tr>
                   <th>#</th>
                   <th>Book</th>
@@ -68,25 +68,23 @@ const Invoices = () => {
                 {paymentHistory.map((history, i) => (
                   <tr
                     key={history._id}
-                    className="border-b border-white/5 hover:bg-white/10 transition"
+                    className="border-b border-white/5  transition"
                   >
-                    <th className="font-bold text-indigo-400">{i + 1}</th>
+                    <th className="font-bold text-black">{i + 1}</th>
 
-                    <td className="font-semibold text-white">
+                    <td className="font-semibold text-black">
                       {history.bookName}
                     </td>
 
                     <td>
-                      <span className=" border-indigo-400 font-medium  text-white ">
+                      <span className=" border-indigo-400 font-medium  text-black">
                         {history.transactionId}
                       </span>
                     </td>
 
-                    <td className="font-bold text-emerald-400">
-                      ৳ {history.amount}
-                    </td>
+                    <td className="font-bold text-black">৳ {history.amount}</td>
 
-                    <td className="text-sm text-slate-400">
+                    <td className="text-sm text-black">
                       {new Date(history.paidAt).toLocaleString()}
                     </td>
                   </tr>
