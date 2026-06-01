@@ -1,22 +1,20 @@
 import React from "react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-// import required modules
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaQuoteLeft } from "react-icons/fa";
 import Loading from "../Loading/Loading";
 
 const BookReview = ({ bookId }) => {
   const axiosSecure = useAxiosSecure();
+
   const {
     data: bookReviews = [],
     isLoading,
-    
   } = useQuery({
     queryKey: ["book-reviews", bookId],
     queryFn: async () => {
@@ -34,54 +32,138 @@ const BookReview = ({ bookId }) => {
   }
 
   if (bookReviews.length === 0) {
-    return "";
+    return null;
   }
 
+  const averageRating =
+    bookReviews.reduce(
+      (sum, review) => sum + Number(review.rating || 0),
+      0
+    ) / bookReviews.length;
+
   return (
-   <div className="p-6 rounded-xl shadow-2xl ">
-  <h2 className="text-2xl text-secondary font-bold my-3">
-    What Readers Are Saying
-  </h2>
+    <section className="mt-16">
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          What Readers Are Saying
+        </h2>
 
-  <div className="flex gap-4 overflow-x-auto scrollbar-hide py-4">
-    {bookReviews.map((review) => (
-      <div
-        key={review._id}
-        className="min-w-75 bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transition-transform duration-300 shrink-0"
-      >
-        {/* Reviewer info */}
-        <div className="flex items-center gap-4 mb-4">
-          <img
-            src={review.customerPhotoURL || "/default-user.png"}
-            alt={review.customerName}
-            className="w-12 h-12 rounded-full object-cover border-2 border-indigo-300"
-          />
-          <div>
-            <h4 className="font-bold text-gray-800">{review.customerName}</h4>
-            <div className="flex items-center text-yellow-400">
-              {Array.from({ length: review.rating }, (_, i) => (
-                <FaStar key={i} />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Review comment */}
-        <p className="text-gray-700 text-sm leading-relaxed">
-          {review.comment}
+        <p className="text-base-content/60 mt-3 text-lg">
+          Real feedback from verified readers
         </p>
 
-        {/* Date */}
-        {review.createdAt && (
-          <p className="text-gray-400 text-xs mt-3">
-            {new Date(review.createdAt).toLocaleDateString()}
-          </p>
-        )}
-      </div>
-    ))}
-  </div>
-</div>
+        <div className="flex justify-center items-center gap-3 mt-5">
+          <div className="flex text-warning text-xl">
+            {Array.from({ length: 5 }, (_, i) => (
+              <FaStar
+                key={i}
+                className={
+                  i < Math.round(averageRating)
+                    ? ""
+                    : "opacity-30"
+                }
+              />
+            ))}
+          </div>
 
+          <span className="font-bold text-lg">
+            {averageRating.toFixed(1)}
+          </span>
+
+          <span className="text-base-content/60">
+            ({bookReviews.length} Reviews)
+          </span>
+        </div>
+      </div>
+
+      {/* Reviews */}
+      <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-4">
+        {bookReviews.map((review) => (
+          <div
+            key={review._id}
+            className="
+              min-w-[340px]
+              max-w-[340px]
+              bg-base-100
+              border
+              border-base-300
+              rounded-3xl
+              p-6
+              shadow-xl
+              hover:-translate-y-2
+              hover:shadow-2xl
+              transition-all
+              duration-300
+              flex
+              flex-col
+            "
+          >
+            {/* Quote Icon */}
+            <div className="mb-4">
+              <FaQuoteLeft className="text-primary text-3xl opacity-30" />
+            </div>
+
+            {/* Reviewer */}
+            <div className="flex items-center gap-4 mb-5">
+              <img
+                src={
+                  review.customerPhotoURL ||
+                  "https://i.ibb.co/Tq6D8jW/user.png"
+                }
+                alt={review.customerName}
+                className="
+                  w-14
+                  h-14
+                  rounded-full
+                  object-cover
+                  ring
+                  ring-primary
+                  ring-offset-2
+                "
+              />
+
+              <div>
+                <h4 className="font-bold text-lg">
+                  {review.customerName}
+                </h4>
+
+                <div className="flex gap-1 text-warning mt-1">
+                  {Array.from(
+                    { length: Number(review.rating) },
+                    (_, i) => (
+                      <FaStar key={i} />
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Comment */}
+            <div className="flex-grow">
+              <p className="text-base-content/80 leading-7 italic">
+                "{review.comment}"
+              </p>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-6 pt-4 border-t border-base-300 flex justify-between items-center">
+              <span className="badge badge-outline badge-primary">
+                Verified Review
+              </span>
+
+              {review.createdAt && (
+                <span className="text-xs text-base-content/50">
+                  {new Date(
+                    review.createdAt
+                  ).toLocaleDateString()}
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

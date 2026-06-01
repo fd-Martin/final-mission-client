@@ -6,7 +6,6 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useNavigate } from "react-router";
 
-
 const Banner = ({ books }) => {
   const navigate = useNavigate();
   console.log(books);

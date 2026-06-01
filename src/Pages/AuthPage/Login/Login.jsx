@@ -23,7 +23,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
+  const handleLogin = (data,e) => {
+      e.preventDefault();
     setLoading(true);
     signInUser(data.email, data.password)
       .then(() => {

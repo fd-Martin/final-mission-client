@@ -25,23 +25,15 @@ const Orders = () => {
       const res = await axiosSecure.get(`/orders?email=${user?.email}`);
       return res.data;
     },
+    enabled: !!user?.email,
   });
 
-  console.log(orders);
-  // Loading
-  if (isLoading) {
-     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
-        <Loading />
-      </div>
-    );
-  }
-
-  // Change Status
   const handleStatusChange = async (id, newStatus) => {
-    const updateData = { status: newStatus };
+    try {
+      const res = await axiosSecure.patch(`/orders/${id}`, {
+        status: newStatus,
+      });
 
-    axiosSecure.patch(`/orders/${id}`, updateData).then((res) => {
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "center",
@@ -53,10 +45,11 @@ const Orders = () => {
 
         refetch();
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // Cancel Order
   const handleCancelOrder = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -83,56 +76,63 @@ const Orders = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen px-3 md:px-6 py-8">
-
+    <div className="min-h-screen px-4 md:px-8 py-8 bg-base-200">
       {/* Header */}
-      <div className="text-center mb-10">
-        <h2
-          className="text-4xl md:text-5xl font-extrabold          
-          text-black"
-        >Orders Management</h2>
+      <div className="text-center mb-12">
+        <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Orders Management
+        </h2>
 
-        <p className="text-base-content/60 mt-3 text-lg">
-          Manage all customer book orders
+        <p className="mt-4 text-base-content/70 text-lg">
+          Manage all customer book orders efficiently
         </p>
 
-        <div className="mt-5">
-          <span className="badge badge-primary badge-lg px-5 py-4 text-white font-bold">
-            Total Orders : {orders.length}
+        <div className="mt-6">
+          <span className="badge badge-primary badge-lg px-6 py-5 text-white font-bold shadow-lg">
+            Total Orders: {orders.length}
           </span>
         </div>
       </div>
 
       {/* Empty State */}
       {orders.length === 0 ? (
-        <div className="text-center py-24 bg-base-100 rounded-3xl shadow-xl">
-          <FaBookOpen className="mx-auto text-6xl text-gray-300 mb-4" />
+        <div className="max-w-4xl mx-auto text-center py-24 bg-base-100 rounded-3xl shadow-xl">
+          <FaBookOpen className="mx-auto text-7xl text-primary mb-6" />
 
-          <h2 className="text-3xl font-bold text-gray-400">
+          <h2 className="text-3xl font-bold text-base-content">
             No Orders Found
           </h2>
 
-          <p className="text-gray-400 mt-2">
-            Customers orders will appear here
+          <p className="mt-3 text-base-content/60">
+            Customer orders will appear here.
           </p>
         </div>
       ) : (
         <div
-          className="max-w-7xl mx-auto
-          bg-base-100 rounded-3xl
-          shadow-2xl border border-base-300 overflow-hidden"
+          className="
+          max-w-7xl
+          mx-auto
+          bg-base-100/90
+          backdrop-blur-lg
+          rounded-3xl
+          border
+          border-base-300
+          shadow-[0_20px_50px_rgba(0,0,0,0.08)]
+          overflow-hidden"
         >
           <div className="overflow-x-auto">
-
-            {/* TABLE */}
-            <table className="table">
-
-              {/* HEAD */}
-              <thead
-                className="bg-gradient-to-r
-                from-primary to-secondary text-white"
-              >
+            <table className="table table-zebra">
+              {/* Table Header */}
+              <thead className="bg-gradient-to-r from-primary via-secondary to-primary text-white">
                 <tr>
                   <th className="py-5">#</th>
                   <th>Book</th>
@@ -142,27 +142,30 @@ const Orders = () => {
                 </tr>
               </thead>
 
-              {/* BODY */}
+              {/* Table Body */}
               <tbody>
                 {orders.map((order, index) => (
                   <tr
                     key={order._id}
-                    className="hover:bg-base-200 transition duration-300"
+                    className="
+                    hover:bg-primary/5
+                    transition-all
+                    duration-300"
                   >
-                    {/* INDEX */}
+                    {/* Index */}
                     <td className="font-bold text-primary">
                       {index + 1}
                     </td>
 
-                    {/* BOOK */}
+                    {/* Book */}
                     <td>
                       <div className="flex items-center gap-4">
-
                         <div className="avatar">
-                          <div className="w-14 rounded-2xl ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <div className="w-16 rounded-2xl shadow-lg ring ring-primary/30 ring-offset-base-100 ring-offset-2">
                             <img
                               src={order.bookPhotoURL}
                               alt={order.bookName}
+                              className="object-cover"
                             />
                           </div>
                         </div>
@@ -172,53 +175,53 @@ const Orders = () => {
                             {order.bookName}
                           </h2>
 
-                          <p className="text-sm text-gray-400">
+                          <p className="text-sm text-base-content/50">
                             Book Order
                           </p>
                         </div>
                       </div>
                     </td>
 
-                    {/* CUSTOMER */}
+                    {/* Customer */}
                     <td>
                       <div>
                         <h2 className="font-semibold">
                           {order.customerName}
                         </h2>
 
-                        <p className="text-sm text-gray-400">
+                        <p className="text-sm text-base-content/60">
                           {order.customerEmail}
                         </p>
                       </div>
                     </td>
 
-                    {/* STATUS */}
+                    {/* Status */}
                     <td>
-                      <div className="flex flex-col gap-2">
-
+                      <div className="flex flex-col gap-3">
                         <span
-                          className={`badge badge-lg text-white capitalize
-                          ${
-                            order.status === "pending"
-                              ? "badge-warning"
-                              : ""
-                          }
-                          ${
-                            order.status === "shipped"
-                              ? "badge-info"
-                              : ""
-                          }
-                          ${
-                            order.status === "delivered"
-                              ? "badge-success"
-                              : ""
-                          }
-                          ${
-                            order.status === "cancelled"
-                              ? "badge-error"
-                              : ""
-                          }
-                        `}
+                          className={`
+                            badge badge-lg text-white capitalize font-semibold px-4 py-4 shadow-md
+                            ${
+                              order.status === "pending"
+                                ? "badge-warning"
+                                : ""
+                            }
+                            ${
+                              order.status === "shipped"
+                                ? "badge-info"
+                                : ""
+                            }
+                            ${
+                              order.status === "delivered"
+                                ? "badge-success"
+                                : ""
+                            }
+                            ${
+                              order.status === "cancelled"
+                                ? "badge-error"
+                                : ""
+                            }
+                          `}
                         >
                           {order.status === "pending" && (
                             <FaTruck className="mr-1" />
@@ -239,7 +242,6 @@ const Orders = () => {
                           {order.status}
                         </span>
 
-                        {/* STATUS SELECT */}
                         <select
                           value={order.status}
                           onChange={(e) =>
@@ -248,11 +250,17 @@ const Orders = () => {
                               e.target.value
                             )
                           }
-                          className="select select-bordered select-sm rounded-xl"
                           disabled={
                             order.status === "delivered" ||
                             order.status === "cancelled"
                           }
+                          className="
+                          select
+                          select-bordered
+                          select-sm
+                          rounded-xl
+                          w-full
+                          focus:border-primary"
                         >
                           <option value={order.status} disabled>
                             Change Status
@@ -260,20 +268,20 @@ const Orders = () => {
 
                           {order.status === "pending" && (
                             <option value="shipped">
-                              shipped
+                              Shipped
                             </option>
                           )}
 
                           {order.status === "shipped" && (
                             <option value="delivered">
-                              delivered
+                              Delivered
                             </option>
                           )}
                         </select>
                       </div>
                     </td>
 
-                    {/* ACTION */}
+                    {/* Action */}
                     <td className="text-center">
                       {order.status !== "delivered" &&
                       order.status !== "cancelled" ? (
@@ -281,12 +289,21 @@ const Orders = () => {
                           onClick={() =>
                             handleCancelOrder(order._id)
                           }
-                          className="btn btn-error btn-outline btn-sm rounded-xl hover:scale-105 transition"
+                          className="
+                          btn
+                          btn-error
+                          btn-sm
+                          text-white
+                          rounded-xl
+                          shadow-md
+                          hover:shadow-xl
+                          hover:scale-105
+                          transition-all"
                         >
                           Cancel
                         </button>
                       ) : (
-                        <span className="text-gray-400 italic">
+                        <span className="text-base-content/50 italic">
                           No Action
                         </span>
                       )}

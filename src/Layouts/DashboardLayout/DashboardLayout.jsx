@@ -63,7 +63,6 @@ const DashboardLayout = () => {
                 {role === "librarian" && "Librarian Dashvoard "}
                 {role === "admin" && " Admin Dashvoard "}
               </div>
-              
             </nav>
             {/* Page content here */}
             <div className="p-4">
@@ -230,15 +229,14 @@ const DashboardLayout = () => {
                   <span
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                     data-tip="Day/Night Mode"
-                    
                   >
                     <ThemeToggle></ThemeToggle>
 
-                    <span className="is-drawer-close:hidden">Day/Night Mode</span>
+                    <span className="is-drawer-close:hidden">
+                      Day/Night Mode
+                    </span>
                   </span>
                 </li>
-
-
               </ul>
             </div>
           </div>

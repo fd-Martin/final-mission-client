@@ -19,13 +19,7 @@ const BookDetails = () => {
   const { id } = useParams();
   const { role } = useRole();
 
-  // const { data: book = {}, isLoading } = useQuery({
-  //   queryKey: ["book-details", id, reviewSubmitted],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get(`/book-details/${id}`);
-  //     return res?.data;
-  //   },
-  // });
+
 
   const { data: book = {}, isLoading } = useQuery({
     queryKey: ["book-details", id, reviewSubmitted],
@@ -154,14 +148,6 @@ const BookDetails = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-base-100 z-50">
-        <Loading />
-      </div>
-    );
-  }
-
   if (!book || !book._id) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4">
@@ -191,38 +177,6 @@ const BookDetails = () => {
             alt={book?.bookName}
             className="w-full h-[650px] object-cover rounded-2xl shadow-xl hover:scale-[1.02] duration-300"
           />
-
-          {reviewPermission?.canReview && !reviewSubmitted && (
-            <div className="mt-8 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-2xl shadow-lg border">
-              <h3 className="text-2xl font-bold text-indigo-700 mb-4">
-                Write Your Review
-              </h3>
-
-              <form onSubmit={handleReviewSubmit(handleSubmitReview)}>
-                <textarea
-                  className="textarea textarea-bordered w-full min-h-32 bg-white"
-                  placeholder="Write your review..."
-                  {...reviewRegister("comment", { required: true })}
-                />
-
-                <select
-                  className="select select-bordered w-full mt-4 bg-white"
-                  {...reviewRegister("rating", { required: true })}
-                >
-                  <option value="">Select Rating</option>
-                  <option value="5">⭐⭐⭐⭐⭐</option>
-                  <option value="4">⭐⭐⭐⭐</option>
-                  <option value="3">⭐⭐⭐</option>
-                  <option value="2">⭐⭐</option>
-                  <option value="1">⭐</option>
-                </select>
-
-                <button className="btn btn-primary w-full mt-5 rounded-xl">
-                  Submit Review
-                </button>
-              </form>
-            </div>
-          )}
         </div>
 
         {/* Right Side */}
@@ -286,6 +240,72 @@ const BookDetails = () => {
           </div>
         </div>
       </div>
+
+      {reviewPermission?.canReview && !reviewSubmitted && (
+        <div className="mt-8 bg-base-200 border border-base-300 rounded-3xl shadow-xl p-6 md:p-8">
+          <h3 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+            Write Your Review
+          </h3>
+
+          <form
+            onSubmit={handleReviewSubmit(handleSubmitReview)}
+            className="space-y-4"
+          >
+            <textarea
+              className="
+        textarea
+        textarea-bordered
+        w-full
+        min-h-36
+        bg-base-100
+        text-base-content
+        rounded-2xl
+        focus:border-primary
+      "
+              placeholder="Share your thoughts about this book..."
+              {...reviewRegister("comment", { required: true })}
+            />
+
+            <select
+              className="
+        select
+        select-bordered
+        w-full
+        bg-base-100
+        text-base-content
+        rounded-2xl
+        focus:border-primary
+      "
+              {...reviewRegister("rating", { required: true })}
+            >
+              <option value="">Select Rating</option>
+              <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+              <option value="4">⭐⭐⭐⭐ Very Good</option>
+              <option value="3">⭐⭐⭐ Good</option>
+              <option value="2">⭐⭐ Fair</option>
+              <option value="1">⭐ Poor</option>
+            </select>
+
+            <button
+              type="submit"
+              className="
+        btn
+        btn-primary
+        w-full
+        rounded-2xl
+        text-base
+        font-semibold
+        h-12
+        shadow-lg
+        hover:scale-[1.02]
+        transition-all
+      "
+            >
+              Submit Review
+            </button>
+          </form>
+        </div>
+      )}
 
       {/* Reviews */}
       <div className="mt-12">

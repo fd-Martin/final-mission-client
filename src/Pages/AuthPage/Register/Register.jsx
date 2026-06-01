@@ -21,7 +21,8 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegistration = (data) => {
+  const handleRegistration = (data, e) => {
+    e.preventDefault();
     setLoading(true);
     const profileImg = data.photo[0];
     createUser(data.email, data.password)
